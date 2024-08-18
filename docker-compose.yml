@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  ion_node_149:
+    build: .
+    container_name: ion_node_149
+    networks:
+      dtn_net:
+        ipv4_address: 172.16.123.149
+    command: -c "killm && ionstart -I /dtn/host149.rc & tail -f /dev/null"
+
+  ion_node_150:
+    build: .
+    container_name: ion_node_150
+    networks:
+      dtn_net:
+        ipv4_address: 172.16.123.150
+    command: -c "killm && ionstart -I /dtn/host150.rc & tail -f /dev/null"
+
+networks:
+  dtn_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.123.0/24
